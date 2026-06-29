@@ -40,15 +40,10 @@ jobs:
         run: |
           VERSION=$(grep '^PORTVERSION=' Makefile | awk -F'\t+' '{print $NF}' | tr -d ' ')
           PKG=$(ls *.pkg)
+          printf '## FreeBSD package for zen-browser %s\n\nIncludes full audio (AAC/MP3), DRM (Widevine), and H.264 support via Linux compat layer.\n\n### Install\n```sh\npkg install %s\n```\n' \
+            "${VERSION}" "${PKG}" > notes.md
           gh release create "v${VERSION}" \
             --title "zen-browser ${VERSION}" \
-            --notes "## FreeBSD package for zen-browser ${VERSION}
-
-Includes full audio (AAC/MP3), DRM (Widevine), and H.264 support via Linux compat layer.
-
-### Install
-\`\`\`sh
-pkg install ${PKG}
-\`\`\`" \
+            --notes-file notes.md \
             "${PKG}" 2>/dev/null || \
           gh release upload "v${VERSION}" "${PKG}" --clobber
