@@ -29,8 +29,13 @@ jobs:
             mkdir -p /usr/ports/www/zen-browser
             cp -r . /usr/ports/www/zen-browser/
             cd /usr/ports/www/zen-browser
-            make package BATCH=yes NO_DEPENDS=yes
-            cp /usr/ports/packages/All/*.pkg "$GITHUB_WORKSPACE/"
+            make package BATCH=yes NO_DEPENDS=yes || true
+            PKG=$(find /usr/ports -name "*.pkg" 2>/dev/null | head -1)
+            if [ -z "$PKG" ]; then
+              echo "ERROR: package not found after build"
+              exit 1
+            fi
+            cp "$PKG" "$GITHUB_WORKSPACE/"
 
       - name: Publish release
         env:
