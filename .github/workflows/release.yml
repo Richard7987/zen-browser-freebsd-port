@@ -26,7 +26,7 @@ jobs:
             pkg install -y linux_base-rl9
             git clone --depth 1 --filter=blob:none --sparse \
               https://github.com/freebsd/freebsd-ports.git /usr/ports
-            cd /usr/ports && git sparse-checkout set Mk Templates UIDs GIDs
+            cd /usr/ports && git sparse-checkout set Mk Templates
           run: |
             mkdir -p /usr/ports/www/zen-browser
             cp -r . /usr/ports/www/zen-browser/
