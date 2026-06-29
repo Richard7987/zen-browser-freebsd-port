@@ -1,0 +1,41 @@
+[
+{ type: install
+  message: <<EOM
+=============================================================================
+Zen Browser ha sido instalado.
+
+PASO OBLIGATORIO — Regenerar caché del compat layer:
+  doas /compat/linux/sbin/ldconfig -r /compat/linux
+
+WIDEVINE (DRM — Spotify, Crunchyroll, Netflix):
+  El wrapper detecta automáticamente Widevine en estas ubicaciones:
+    /usr/local/lib/browser_plugins/gmp-widevinecdm/   (recomendado)
+    ~/.config/zen/*/gmp-widevinecdm/
+    ~/.mozilla/firefox/*/gmp-widevinecdm/
+    ~/.config/BraveSoftware/Brave-Browser/WidevineCdm/
+
+  Si tienes Brave instalado, Widevine ya está disponible automáticamente.
+  Si no, copia la carpeta gmp-widevinecdm de Firefox/Chrome al perfil de Zen.
+
+CONFIGURACIÓN DEL PERFIL (user.js):
+  Tras el primer arranque, añade esto a tu perfil en
+  ~/.config/zen/<perfil>/user.js:
+
+    user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+    user_pref("network.http.http3.enabled", false);
+    user_pref("security.sandbox.GMP.level", 0);
+    user_pref("security.sandbox.content.level", 1);
+    user_pref("media.eme.enabled", true);
+    user_pref("media.gmp-widevinecdm.enabled", true);
+    user_pref("media.gmp-widevinecdm.visible", true);
+    user_pref("media.gmp-widevinecdm.autoupdate", false);
+    user_pref("alerts.useSystemBackend", true);
+
+NOTIFICACIONES:
+  Las notificaciones web se envían via DBus al gestor del sistema (dunst, etc.)
+  siempre que DBUS_SESSION_BUS_ADDRESS esté definido en la sesión.
+
+=============================================================================
+EOM
+}
+]

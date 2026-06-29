@@ -1,0 +1,13 @@
+LIBMFX_1.0 {
+  global:
+    MFXClose; MFXInit; MFXJoinSession; MFXQueryIMPL; MFXQueryVersion;
+    MFXVideoCORE_GetHandle; MFXVideoCORE_SetFrameAllocator; MFXVideoCORE_SetHandle;
+    MFXVideoCORE_SyncOperation;
+    MFXVideoDECODE_Close; MFXVideoDECODE_DecodeFrameAsync; MFXVideoDECODE_DecodeHeader;
+    MFXVideoDECODE_Init; MFXVideoDECODE_QueryIOSurf;
+    MFXVideoENCODE_Close; MFXVideoENCODE_EncodeFrameAsync; MFXVideoENCODE_GetVideoParam;
+    MFXVideoENCODE_Init; MFXVideoENCODE_Query; MFXVideoENCODE_QueryIOSurf; MFXVideoENCODE_Reset;
+    MFXVideoVPP_Close; MFXVideoVPP_Init; MFXVideoVPP_RunFrameVPPAsync;
+};
+LIBMFX_1.8 { global: MFXVideoUSER_Load; } LIBMFX_1.0;
+LIBMFX_1.14 { global: MFXInitEx; } LIBMFX_1.8;

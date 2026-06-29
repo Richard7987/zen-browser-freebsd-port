@@ -1,0 +1,18 @@
+Zen Browser is a Firefox-based browser focused on privacy, performance, and
+a distraction-free browsing experience. It features a customizable sidebar,
+tab grouping, and a clean minimalist UI built on top of Mozilla's engine.
+
+This port installs the official Linux binary under the FreeBSD Linux
+compatibility layer (linux_base-rl9), including:
+
+ - Stub libraries for the compat layer (libmfx, libzvbi, libsoxr, AMR codecs,
+   SVT-AV1) required by the bundled FFmpeg to load successfully
+ - libnotify (from Rocky Linux 9) for system notifications via DBus
+ - A wrapper script that auto-detects Widevine CDM (for DRM playback) and
+   configures PulseAudio, GTK theme, and DBus session automatically
+
+DRM (Widevine) requires MOZ_DISABLE_GMP_SANDBOX=1 because FreeBSD's Linux
+compat layer does not support Linux user namespaces. This is set automatically
+by the wrapper script.
+
+WWW: https://zen-browser.app

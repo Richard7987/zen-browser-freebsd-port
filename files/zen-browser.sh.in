@@ -1,0 +1,49 @@
+#!/bin/sh
+# Zen Browser wrapper — FreeBSD Linux compat layer
+
+# ── PulseAudio ─────────────────────────────────────────────────────────────
+_pa_sock="/var/run/xdg/$(whoami)/pulse/native"
+if ! pgrep -x pulseaudio >/dev/null 2>&1; then
+    /usr/local/bin/pulseaudio --daemonize=yes --exit-idle-time=-1
+    i=0
+    while [ ! -S "$_pa_sock" ] && [ $i -lt 10 ]; do
+        sleep 0.5
+        i=$((i + 1))
+    done
+fi
+
+export XDG_RUNTIME_DIR="/var/run/xdg/$(whoami)"
+export PULSE_SERVER="$_pa_sock"
+export PULSE_COOKIE="$HOME/.config/pulse/cookie"
+
+# ── Graphics ───────────────────────────────────────────────────────────────
+export LIBGL_DRI3_DISABLE=1
+export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
+
+# ── GTK theme ──────────────────────────────────────────────────────────────
+export GTK_THEME="${GTK_THEME:-$(gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null | tr -d "'")}"
+export GTK_DATA_PREFIX=%%PREFIX%%
+export XCURSOR_PATH=%%PREFIX%%/share/icons:${HOME}/.icons
+export XDG_DATA_DIRS=%%PREFIX%%/share:/usr/share:${XDG_DATA_DIRS:-%%PREFIX%%/share}
+
+# ── DBus (notificaciones → dunst / notification daemon) ───────────────────
+export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS}"
+
+# ── Widevine DRM (auto-detect) ─────────────────────────────────────────────
+# Search common locations in order of preference
+for _gmp in \
+    "%%PREFIX%%/lib/browser_plugins/symlinks/gecko" \
+    "%%PREFIX%%/lib/browser_plugins/gmp-widevinecdm" \
+    "${HOME}/.config/zen"/*/gmp-widevinecdm \
+    "${HOME}/.mozilla/firefox"/*/gmp-widevinecdm \
+    "${HOME}/.config/mozilla/firefox"/*/gmp-widevinecdm \
+    "${HOME}/.config/BraveSoftware/Brave-Browser/WidevineCdm"; do
+    if [ -d "$_gmp" ]; then
+        export MOZ_GMP_PATH="$_gmp"
+        break
+    fi
+done
+export MOZ_DISABLE_GMP_SANDBOX=1
+
+# ── Launch ─────────────────────────────────────────────────────────────────
+exec %%ZEN_LIBDIR%%/zen "$@"

@@ -1,0 +1,41 @@
+name: Version Bump Request
+description: A new Zen Browser release is available and the port needs updating
+labels: ["version-bump"]
+body:
+  - type: input
+    id: new-version
+    attributes:
+      label: New Zen Browser version
+      placeholder: "e.g. 1.22.0b"
+    validations:
+      required: true
+
+  - type: input
+    id: release-url
+    attributes:
+      label: Release URL
+      placeholder: "https://github.com/zen-browser/desktop/releases/tag/..."
+    validations:
+      required: true
+
+  - type: input
+    id: sha256
+    attributes:
+      label: SHA256 of zen.linux-x86_64.tar.xz
+      description: Run `sha256 zen.linux-x86_64.tar.xz` or check the release assets
+      placeholder: "e.g. abc123..."
+
+  - type: checkboxes
+    id: tested
+    attributes:
+      label: Testing
+      options:
+        - label: I updated PORTVERSION and distinfo and ran `make install` successfully
+        - label: Browser launches and basic browsing works
+        - label: Audio works (tested on a site with audio)
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Any changes in the new release that might affect the port (new dependencies, changed paths, etc.)

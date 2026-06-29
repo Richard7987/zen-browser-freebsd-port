@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y --no-install-recommends shellcheck
+
+      - name: Lint wrapper script
+        # Replace %%VAR%% port placeholders with a dummy path before linting
+        # so shellcheck sees syntactically valid shell.
+        run: |
+          sed 's|%%[A-Z_][A-Z_0-9]*%%|/usr/local|g' \
+            files/zen-browser.sh.in > /tmp/zen-browser.sh
+          shellcheck /tmp/zen-browser.sh
+
+  portlint:
+    name: portlint (FreeBSD)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run portlint inside FreeBSD VM
+        uses: vmactions/freebsd-vm@v1
+        with:
+          usesh: true
+          prepare: |
+            pkg install -y portlint
+          run: |
+            # Place port in expected tree location so portlint resolves paths correctly
+            mkdir -p /usr/ports/www/zen-browser
+            cp -r . /usr/ports/www/zen-browser/
+            portlint -A /usr/ports/www/zen-browser

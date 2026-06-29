@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Zen Browser
+GenericName=Web Browser
+Comment=Firefox-based browser focused on privacy and productivity
+Exec=%%PREFIX%%/bin/zen-browser %u
+Icon=zen-browser
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
+StartupWMClass=zen-alpha
+StartupNotify=true

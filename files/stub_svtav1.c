@@ -1,0 +1,10 @@
+void* svt_av1_enc_init_handle() { return 0; }
+void* svt_av1_enc_set_parameter() { return 0; }
+void* svt_av1_enc_init() { return 0; }
+void* svt_av1_enc_send_picture() { return 0; }
+void* svt_av1_enc_get_packet() { return 0; }
+void* svt_av1_enc_release_out_buffer() { return 0; }
+void* svt_av1_enc_deinit() { return 0; }
+void* svt_av1_enc_deinit_handle() { return 0; }
+void* svt_av1_enc_stream_header() { return 0; }
+void* svt_av1_enc_stream_header_release() { return 0; }

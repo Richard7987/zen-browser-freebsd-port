@@ -1,0 +1,5 @@
+TIMESTAMP = 1751068800
+SHA256 (zen-browser/zen.linux-x86_64.tar.xz) = 02b814ccd0e6659468d438fa3be91c0e9934b1f0d5c58078319ea7a6e26729eb
+SIZE (zen-browser/zen.linux-x86_64.tar.xz) = 90817468
+SHA256 (zen-browser/libnotify-0.7.9-8.el9.x86_64.rpm) = 938b1ea95bce0a2fa203dc2b737c18be7ec48f2c9547cff0a26678979490e7c5
+SIZE (zen-browser/libnotify-0.7.9-8.el9.x86_64.rpm) = 43706

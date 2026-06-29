@@ -1,0 +1,70 @@
+name: Bug Report
+description: Report a build failure, crash, or runtime issue with the port
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing, make sure `linux_base-rl9` is installed and `linux_enable="YES"` is in `/etc/rc.conf`.
+
+  - type: dropdown
+    id: freebsd-version
+    attributes:
+      label: FreeBSD version
+      options:
+        - "15.1-RELEASE"
+        - "15.0-RELEASE"
+        - "14.2-RELEASE"
+        - "14.1-RELEASE"
+        - "13.x"
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Type of issue
+      options:
+        - Build failure (make install)
+        - Browser does not launch
+        - No audio / audio crackling
+        - AAC/H264 video not playing
+        - DRM / Widevine not working
+        - System notifications not working
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error output
+      description: Paste the full terminal output. For build errors, run `make install 2>&1 | tee /tmp/zen-build.log` and paste the result.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: linux-compat-check
+    attributes:
+      label: Linux compat layer status
+      description: Output of `kldstat | grep linux` and `pkg info linux_base-rl9`
+      render: shell
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: user.js contents, DE/WM, audio server (PulseAudio/PipeWire), anything else relevant

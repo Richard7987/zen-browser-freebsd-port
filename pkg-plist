@@ -1,0 +1,75 @@
+bin/zen-browser
+lib/zen-browser/application.ini
+lib/zen-browser/browser/chrome/icons/default/default128.png
+lib/zen-browser/browser/chrome/icons/default/default16.png
+lib/zen-browser/browser/chrome/icons/default/default32.png
+lib/zen-browser/browser/chrome/icons/default/default48.png
+lib/zen-browser/browser/chrome/icons/default/default64.png
+lib/zen-browser/browser/omni.ja
+lib/zen-browser/defaults/pref/channel-prefs.js
+lib/zen-browser/dependentlibs.list
+lib/zen-browser/fonts/TwemojiMozilla.ttf
+lib/zen-browser/glxtest
+lib/zen-browser/gmp-clearkey/0.1/libclearkey.so
+lib/zen-browser/gmp-clearkey/0.1/manifest.json
+lib/zen-browser/icons/updater.png
+lib/zen-browser/libfreeblpriv3.so
+lib/zen-browser/libgkcodecs.so
+lib/zen-browser/liblgpllibs.so
+lib/zen-browser/libmozavcodec.so
+lib/zen-browser/libmozavutil.so
+lib/zen-browser/libmozgtk.so
+lib/zen-browser/libmozinference.so
+lib/zen-browser/libmozsandbox.so
+lib/zen-browser/libmozsqlite3.so
+lib/zen-browser/libmozwayland.so
+lib/zen-browser/libnspr4.so
+lib/zen-browser/libnss3.so
+lib/zen-browser/libnssutil3.so
+lib/zen-browser/libonnxruntime.so
+lib/zen-browser/libplc4.so
+lib/zen-browser/libplds4.so
+lib/zen-browser/libsmime3.so
+lib/zen-browser/libsoftokn3.so
+lib/zen-browser/libssl3.so
+lib/zen-browser/libxul.so
+lib/zen-browser/omni.ja
+lib/zen-browser/pingsender
+lib/zen-browser/platform.ini
+lib/zen-browser/precomplete
+lib/zen-browser/removed-files
+lib/zen-browser/update-settings.ini
+lib/zen-browser/updater
+lib/zen-browser/updater.ini
+lib/zen-browser/vaapitest
+lib/zen-browser/vulkantest
+lib/zen-browser/zen
+lib/zen-browser/zen-bin
+share/applications/zen-browser.desktop
+share/pixmaps/zen-browser.png
+@cwd /
+compat/linux/usr/lib64/libSvtAv1Enc.so.0
+compat/linux/usr/lib64/libmfx.so
+compat/linux/usr/lib64/libmfx.so.1
+compat/linux/usr/lib64/libnotify.so
+compat/linux/usr/lib64/libnotify.so.4
+compat/linux/usr/lib64/libnotify.so.4.0.0
+compat/linux/usr/lib64/libopencore-amrnb.so.0
+compat/linux/usr/lib64/libopencore-amrwb.so.0
+compat/linux/usr/lib64/libsoxr.so.0
+compat/linux/usr/lib64/libvo-amrwbenc.so.0
+compat/linux/usr/lib64/libzvbi.so.0
+@exec /compat/linux/sbin/ldconfig -r /compat/linux
+@unexec /compat/linux/sbin/ldconfig -r /compat/linux
+@cwd /usr/local
+@dir lib/zen-browser/browser/chrome/icons/default
+@dir lib/zen-browser/browser/chrome/icons
+@dir lib/zen-browser/browser/chrome
+@dir lib/zen-browser/browser
+@dir lib/zen-browser/defaults/pref
+@dir lib/zen-browser/defaults
+@dir lib/zen-browser/fonts
+@dir lib/zen-browser/gmp-clearkey/0.1
+@dir lib/zen-browser/gmp-clearkey
+@dir lib/zen-browser/icons
+@dir lib/zen-browser
