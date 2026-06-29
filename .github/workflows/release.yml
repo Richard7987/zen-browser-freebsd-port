@@ -29,7 +29,7 @@ jobs:
             mkdir -p /usr/ports/www/zen-browser
             cp -r . /usr/ports/www/zen-browser/
             cd /usr/ports/www/zen-browser
-            make package BATCH=yes
+            make package BATCH=yes NO_DEPENDS=yes
             cp /usr/ports/packages/All/*.pkg "$GITHUB_WORKSPACE/"
 
       - name: Publish release
