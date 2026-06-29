@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-pkg:
+    name: Build and publish FreeBSD package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build .pkg inside FreeBSD VM
+        uses: vmactions/freebsd-vm@v1
+        with:
+          usesh: true
+          mem: 8192
+          prepare: |
+            pkg install -y git
+            kldload linux64 || true
+            pkg install -y linux_base-rl9
+            git clone --depth 1 --filter=blob:none --sparse \
+              https://github.com/freebsd/freebsd-ports.git /usr/ports
+            cd /usr/ports && git sparse-checkout set Mk Templates UIDs GIDs
+          run: |
+            mkdir -p /usr/ports/www/zen-browser
+            cp -r . /usr/ports/www/zen-browser/
+            cd /usr/ports/www/zen-browser
+            make package BATCH=yes
+            cp /usr/ports/packages/All/*.pkg "$GITHUB_WORKSPACE/"
+
+      - name: Publish release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(grep '^PORTVERSION=' Makefile | awk -F'\t+' '{print $NF}' | tr -d ' ')
+          PKG=$(ls *.pkg)
+          gh release create "v${VERSION}" \
+            --title "zen-browser ${VERSION}" \
+            --notes "## FreeBSD package for zen-browser ${VERSION}
+
+Includes full audio (AAC/MP3), DRM (Widevine), and H.264 support via Linux compat layer.
+
+### Install
+\`\`\`sh
+pkg install ${PKG}
+\`\`\`" \
+            "${PKG}" 2>/dev/null || \
+          gh release upload "v${VERSION}" "${PKG}" --clobber
