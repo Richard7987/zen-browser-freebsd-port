@@ -41,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION=$(grep '^PORTVERSION=' Makefile | awk -F'\t+' '{print $NF}' | tr -d ' ')
+          VERSION=$(grep '^DISTVERSION=' Makefile | awk -F'\t+' '{print $NF}' | tr -d ' ')
           PKG=$(ls *.pkg)
           printf '## FreeBSD package for zen-browser %s\n\nIncludes full audio (AAC/MP3), DRM (Widevine), and H.264 support via Linux compat layer.\n\n### Install\n```sh\npkg install %s\n```\n' \
             "${VERSION}" "${PKG}" > notes.md

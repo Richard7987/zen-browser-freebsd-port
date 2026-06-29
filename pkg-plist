@@ -59,8 +59,8 @@ compat/linux/usr/lib64/libopencore-amrwb.so.0
 compat/linux/usr/lib64/libsoxr.so.0
 compat/linux/usr/lib64/libvo-amrwbenc.so.0
 compat/linux/usr/lib64/libzvbi.so.0
-@exec /compat/linux/sbin/ldconfig -r /compat/linux
-@unexec /compat/linux/sbin/ldconfig -r /compat/linux
+@postexec /compat/linux/sbin/ldconfig -r /compat/linux
+@postunexec /compat/linux/sbin/ldconfig -r /compat/linux
 @cwd /usr/local
 @dir lib/zen-browser/browser/chrome/icons/default
 @dir lib/zen-browser/browser/chrome/icons

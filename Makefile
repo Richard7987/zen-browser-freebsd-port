@@ -10,7 +10,6 @@ WWW=		https://zen-browser.app
 
 LICENSE=	MPL20
 
-# CPE tracks CVEs from Firefox/Gecko that apply to this fork
 CPE_VENDOR=	mozilla
 CPE_PRODUCT=	firefox
 
@@ -26,11 +25,6 @@ USE_LINUX=	dbus gdkpixbuf2 glib2
 ONLY_FOR_ARCHS=	amd64
 
 ZEN_LIBDIR=	${PREFIX}/lib/zen-browser
-# Stubs go in the Linux compat layer's lib dir so ldconfig makes them visible
-# to ALL Linux ELF processes (including Firefox's sandboxed Utility process).
-# Installing under PREFIX/lib/zen-browser/linux and using LD_LIBRARY_PATH only
-# works for the main Zen process; the Utility/RDD process has a clean environment
-# and must find stubs via the ldconfig cache.
 STUB_DIR=	${LINUXBASE}/usr/lib64
 
 WRKSRC=		${WRKDIR}
