@@ -12,7 +12,8 @@ if ! pgrep -x pulseaudio >/dev/null 2>&1; then
     done
 fi
 
-export XDG_RUNTIME_DIR="/var/run/xdg/$(whoami)"
+XDG_RUNTIME_DIR="/var/run/xdg/$(whoami)"
+export XDG_RUNTIME_DIR
 export PULSE_SERVER="$_pa_sock"
 export PULSE_COOKIE="$HOME/.config/pulse/cookie"
 
@@ -23,8 +24,8 @@ export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
 # ── GTK theme ──────────────────────────────────────────────────────────────
 export GTK_THEME="${GTK_THEME:-$(gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null | tr -d "'")}"
 export GTK_DATA_PREFIX=%%PREFIX%%
-export XCURSOR_PATH=%%PREFIX%%/share/icons:${HOME}/.icons
-export XDG_DATA_DIRS=%%PREFIX%%/share:/usr/share:${XDG_DATA_DIRS:-%%PREFIX%%/share}
+export XCURSOR_PATH="%%PREFIX%%/share/icons:${HOME}/.icons"
+export XDG_DATA_DIRS="%%PREFIX%%/share:/usr/share:${XDG_DATA_DIRS:-%%PREFIX%%/share}"
 
 # ── DBus (notificaciones → dunst / notification daemon) ───────────────────
 export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS}"
